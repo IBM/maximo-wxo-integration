@@ -17,6 +17,13 @@ FastAPI is a high-performance web framework python library enabling the building
 
 https://fastapi.tiangolo.com/
 
+# Reference Architecture
+You can find reference architecture docs for this assistant and Maximo Applicaiton suite below.
+
+Component Model: https://ibm.github.io/intelligent-asset-reference-architecture/Architecture-Overview/Services-View/Maximo-AI-Assistant-Pattern---Component-Model/
+
+Usage Scenario: https://ibm.github.io/intelligent-asset-reference-architecture/Architecture-Overview/Usage-Scenario/Maximo-AI-Assistant-Pattern---Usage-Scenario/ 
+
 
 # Deployment & Configuration
 
