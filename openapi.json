@@ -1,0 +1,431 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Maximo Integration",
+        "description": "A wrapper written using Python FastAPI framework to access the Maximo APIs.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "{https endpoint}"
+        }
+    ],
+    "security": [
+        {
+            "OAuth2PasswordBearer": []
+        }
+    ],        
+    "paths": {
+        "/token": {
+            "post": {
+                "summary": "Login",
+                "operationId": "login_token_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "grant_type": {
+                                        "type": "string",
+                                        "title": "Grant Type",
+                                        "description": "Grant type"
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "title": "Username",
+                                        "description": "The username of the user"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "title": "Password",
+                                        "description": "The password of the user"
+                                    },
+                                    "scope": {
+                                        "type": "string",
+                                        "title": "Scope",
+                                        "default": "",
+                                        "description": "The scope of the user"
+                                    },
+                                    "client_id": {
+                                        "type": "string",
+                                        "title": "Client Id",
+                                        "description": "The client id of the user"
+
+                                    },
+                                    "client_secret": {
+                                        "type": "string",                                        
+                                        "title": "Client Secret",
+                                        "description": "The client id of the user"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "username",
+                                    "password"
+                                ],
+                                "title": "Body_login_token_post"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "description": "The error message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "description": "The error message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/me": {
+            "get": {
+                "summary": "Read Users Me",
+                "operationId": "read_users_me_users_me_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/": {
+            "get": {
+                "summary": "Hello World",
+                "operationId": "hello_world_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/items/": {
+            "get": {
+                "summary": "Read Items",
+                "operationId": "read_items_items_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/get_unhealthy_assets": {
+            "get": {
+                "summary": "Get unhealthy assets",
+                "operationId": "get_unhealthy_assets_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "displayResult": {
+                                            "type": "string",
+                                            "description": "The list of unhealthy assets with description and asset number in html format"
+                                        },
+                                        "jsonResult": {
+                                            "type": "string",
+                                            "description": "The list of unhealthy assets in json format"
+                                        },
+                                        "jsonResultAssetString": {
+                                            "type": "string",
+                                            "description": "Asset number space delimited in a String"
+                                        },
+                                        "jsonResultAssetUIDString": {
+                                            "type": "string",
+                                            "description": "Asset UID space delimited in a String"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "x_access_token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "x access token"
+                        }
+                    }
+                ],                
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/create_work_order": {
+            "get": {
+                "summary": "Create work order",
+                "operationId": "create_work_order_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "result": {
+                                            "type": "string",
+                                            "description": "The response from the creation of a work order"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "asset_number",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Number"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Description"
+                        }
+                    }
+
+                ],                
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/check_asset_for_work_orders": {
+            "get": {
+                "summary": "Check asset for work order",
+                "operationId": "check_asset_for_work_orders_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "displayResult": {
+                                            "type": "string",
+                                            "description": "The list of work orders in html format"
+                                        },
+                                        "jsonResult": {
+                                            "type": "string",
+                                            "description": "The list of work orders in json format"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "asset_number",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Number"
+                        }
+                    }
+                ],                
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/check_multiple_assets_for_work_orders": {
+            "get": {
+                "summary": "Check multiple assets for work orders",
+                "operationId": "check_multiple_assets_for_work_orders_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "displayResult": {
+                                            "type": "string",
+                                            "description": "The list of work orders for multiple assets if they exist in html format."
+                                        },
+                                        "jsonResult": {
+                                            "type": "string",
+                                            "description": "The list of work orders for multiple assets if they exist in json format."
+                                        },
+                                        "assetsNoWorkOrdersString": {
+                                            "type": "string",
+                                            "description": "A comma delimited string of assets with no work orders."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "comma_separated_asset_list",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "A comma separated list of asset numbers."
+                        }
+                    },
+                    {
+                        "name": "comma_separated_asset_uid_list",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "A comma separated list of asset uid numbers."
+                        }
+                    }
+
+                ],                
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/hello": {
+            "get": {
+                "tags": [
+                    "hello"
+                ],
+                "summary": "Hello",
+                "operationId": "hello_hello_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "hello"
+                ],
+                "summary": "Hello",
+                "operationId": "hello_hello_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "OAuth2PasswordBearer": {
+                "type": "oauth2",
+                "flows": {
+                    "password": {
+                        "scopes": {},
+                        "tokenUrl": "{https endpoint}/token"
+                    }
+                }
+            }
+        }
+    }
+}
