@@ -1,0 +1,9 @@
+# Copyright IBM Corp. 2024
+fastapi
+uvicorn
+python-dotenv
+python-multipart
+pydantic
+passlib
+passlib[bcrypt]
+requests==2.32.3
