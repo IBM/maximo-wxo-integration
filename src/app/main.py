@@ -13,6 +13,9 @@ from random import randint, randrange
 from datetime import date
 import os
 from routers import hello
+from dotenv import load_dotenv
+
+load_dotenv()
 
 maximo_server = os.environ['MAXIMO_SERVER_ENV']
 

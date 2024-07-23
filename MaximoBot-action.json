@@ -282,7 +282,7 @@
                       "text_expression": {
                         "concat": [
                           {
-                            "scalar": "View Maximo [assets at risk dashboard](https://main.manage.tmpmas90wo.ibmmasivt.com/maximo/oslc/graphite/relengineer/index.html?fromMenu=false&xyRanges=70%2C100%2C40%2C60%2C70%2C100%2C20%2C40%2C40%2C70%2C80%2C100%2C40%2C70%2C60%2C80%2C40%2C70%2C40%2C60%2C40%2C70%2C20%2C40&title=Medium&xAxis=EOL&yAxis=CRITICALITY#/health){{target=\"_self\" rel=\"noopener noreferrer\"}}."
+                            "scalar": "View Maximo [assets at risk dashboard]({maximo url}/maximo/oslc/graphite/relengineer/index.html?fromMenu=false&xyRanges=70%2C100%2C40%2C60%2C70%2C100%2C20%2C40%2C40%2C70%2C80%2C100%2C40%2C70%2C60%2C80%2C40%2C70%2C40%2C60%2C40%2C70%2C20%2C40&title=Medium&xAxis=EOL&yAxis=CRITICALITY#/health){{target=\"_self\" rel=\"noopener noreferrer\"}}."
                           },
                           {
                             "scalar": "\n\n<br />\n\n\n\nGetting a list of assets at high risk ..."
