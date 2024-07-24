@@ -42,7 +42,7 @@ The running code below shows you how to run the code using docker and command li
 ### Build and deploy a Docker image
 Install a containerisation tool of choice and install docker.
 
-Cloned the code repository. Then, create a new .env file in the wxo-maximo-integration folder.
+Clone the code repository. Then, create a new .env file in the wxo-maximo-integration folder.
 
 In the .env file, set the MAXIMO_SERVER_ENV value to your maximo manage hostname:
 ```
