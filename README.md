@@ -225,7 +225,7 @@ Click the 'Add' button on the extension and follow the steps until you come to '
 
 ![alt text](images/add-extension.png) 
 
-The credentials you put in are visible here. Your server URL from your openapi.json file will be shown at the bottom of the page.
+The credentials you put in are visible here. Your server URL from your `openapi.json` file will be shown at the bottom of the page.
 
 ![alt text](images/auth.png)
 
