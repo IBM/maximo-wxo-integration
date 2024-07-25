@@ -42,7 +42,9 @@ The running code below shows you how to run the code using docker and command li
 ### Build and deploy a Docker image
 Install a containerisation tool of choice and install docker.
 
-Set the MAXIMO_SERVER_ENV value to your maximo manage hostname
+Clone the code repository. Then, create a new `.env` file in the wxo-maximo-integration folder.
+
+In the `.env` file, set the `MAXIMO_SERVER_ENV` value to your Maximo Manage hostname:
 ```
 MAXIMO_SERVER_ENV={enter your hostname}
 ```
@@ -99,8 +101,6 @@ This ends the setting up of your conda environment.
 #### 3. Starting the Service
 When you have cloned the code repository, installed and created your conda environment, and activated the environment, 
 you can then start the REST API service.
-
-In your .env file set your MAXIMO_SERVER_ENV value to be your maximo manage hostname.
 
 Navigate to the location of the main.py file in the src/app folder.
 
@@ -225,7 +225,7 @@ Click the 'Add' button on the extension and follow the steps until you come to '
 
 ![alt text](images/add-extension.png) 
 
-This shows the credentials put in and your server will shown at the bottom of the page from your openapi.json file.
+The credentials you put in are visible here. Your server URL from your `openapi.json` file will be shown at the bottom of the page.
 
 ![alt text](images/auth.png)
 
@@ -258,7 +258,7 @@ Once that has been uploaded click on 'Close' in the top right for the settings. 
 ![alt text](images/maximo-actions-added.png)
 
 ### 5. Preview the assistant
-At this point you have configured all the required items in Watsonx Orchestrate and the assistant. You can preview the assistant by clicking on 'Preview' on the left hadn menu.
+At this point you have configured all the required items in Watsonx Orchestrate and the assistant. You can preview the assistant by clicking on 'Preview' on the left hand menu.
 
 ![alt text](images/preview-assistant.png)
 
