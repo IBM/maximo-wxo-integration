@@ -188,29 +188,54 @@ async def get_unhealthy_assets(
 @app.get("/create_work_order")
 async def create_work_order(
     current_user: Annotated[User, Depends(get_current_active_user)],
+    x_access_token,
     asset_number,
-    description
+    site_id,
+    description,
 ):
     
-    conn = http.client.HTTPSConnection(maximo_server)
+    print("Value="+x_access_token)
 
-    payload = '{"description":"' + description + '","siteid":"BEDFORD","assetnum":"'+str(asset_number)+'"}'
-    print(payload)
+    s = requests.Session()
+
+    who_am_i_query = "/maximo/oslc/whoami"
+    url = "https://" + maximo_server + who_am_i_query
 
     headers = {
-        'transactionid': randint(10000,30000),
         'content-type': "application/json",
-        'apikey': maximo_apikey,
         'accept': "application/json",
+        'x-access-token': x_access_token
+    }
+
+    print(url)
+    r = s.get(url,headers=headers)
+    print("------")
+    print(r.text)
+    print("------")
+    print(r.status_code)
+
+
+    query = "/maximo/api/os/mxapiwo?lean=1"
+
+    url = "https://" + maximo_server + query
+
+    headers = {
+        'content-type': "application/json",
+        'accept': "*/*",
         'properties' : "wonum,siteid"
-        }
+    }
+    payload = '{"description":"' + description + '","siteid":"'+ str(site_id)+'","assetnum":"'+str(asset_number)+'"}'
 
-    conn.request("POST", "/maximo/api/os/mxapiwo?lean=1", payload, headers)
+    json_object = json.loads(payload)
+    print(payload)
+    print(url)
+    r = s.post(url,json=json_object,headers=headers)
+    print("------After POST")
+    print(r.text)
+    print("------")
+    print(r.status_code)
 
-    res = conn.getresponse()
-    data = res.read()
-
-    json_work_orders = json.loads(data)
+    json_work_orders = json.loads(r.text)
 
     print(json_work_orders)
 
@@ -223,26 +248,46 @@ async def create_work_order(
     return {"result" : resp }
 
 
-async def get_work_orders_for_asset(asset_number):
+async def get_work_orders_for_asset(x_access_token,asset_number):
 
-    conn = http.client.HTTPSConnection(maximo_server)
+    print("Value="+x_access_token)
 
-    payload = ''
+    s = requests.Session()
+
+    who_am_i_query = "/maximo/oslc/whoami"
+    url = "https://" + maximo_server + who_am_i_query
 
     headers = {
-        'content-type': "*.*",
-        'apikey': maximo_apikey,
-        'accept': "application/json"
-        }
+        'content-type': "application/json",
+        'accept': "application/json",
+        'x-access-token': x_access_token
+    }
+
+    print(url)
+    r = s.get(url,headers=headers)
+    print("------")
+    print(r.text)
+    print("------")
+    print(r.status_code)
+
 
     query='/maximo/api/os/mxapiwo?lean=1&oslc.where=(assetnum="' + str(asset_number)+'")&oslc.select=assetnum,description,wonum'
 
-    conn.request("GET", query, headers=headers)
+    url = "https://" + maximo_server + query
 
-    res = conn.getresponse()
-    data = res.read()
+    headers = {
+        'content-type': "application/json",
+        'accept': "application/json",
+    }
 
-    json_work_orders = json.loads(data)
+    print(url)
+    r = s.get(url,headers=headers)
+    print("------After GET")
+    print(r.text)
+    print("------")
+    print(r.status_code)
+
+    json_work_orders = json.loads(r.text)
 
     member = json_work_orders['member']
 
@@ -261,9 +306,10 @@ async def get_work_orders_for_asset(asset_number):
 @app.get("/check_asset_for_work_orders")
 async def check_asset_for_work_orders(
     current_user: Annotated[User, Depends(get_current_active_user)],
+    x_access_token,
     asset_number
 ):
-    json_work_orders = get_work_orders_for_asset(asset_number)
+    json_work_orders = get_work_orders_for_asset(x_access_token,asset_number)
 
     work_orders = json_work_orders['work_orders']
 
@@ -282,6 +328,7 @@ async def check_asset_for_work_orders(
 @app.get("/check_multiple_assets_for_work_orders")
 async def check_multiple_assets_for_work_orders(
     current_user: Annotated[User, Depends(get_current_active_user)],
+    x_access_token,
     comma_separated_asset_list,
     comma_separated_asset_uid_list
 ):
@@ -294,7 +341,7 @@ async def check_multiple_assets_for_work_orders(
     assets_no_work_orders = []
     for assetIndex, asset in enumerate(assetNumbers):
         print(asset)
-        json_work_orders = await get_work_orders_for_asset(asset)    
+        json_work_orders = await get_work_orders_for_asset(x_access_token,asset)    
         if json_work_orders:
             work_orders = json_work_orders['work_orders']
 

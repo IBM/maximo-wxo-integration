@@ -244,12 +244,30 @@
                 },
                 "parameters": [
                     {
+                        "name": "x_access_token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "x access token"
+                        }
+                    },
+                    {
                         "name": "asset_number",
                         "in": "query",
                         "required": true,
                         "schema": {
                             "type": "string",
                             "title": "Asset Number"
+                        }
+                    },
+                    {
+                        "name": "site_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Site Id"
                         }
                     },
                     {
@@ -298,6 +316,15 @@
                 },
                 "parameters": [
                     {
+                        "name": "x_access_token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "x access token"
+                        }
+                    },
+                    {   
                         "name": "asset_number",
                         "in": "query",
                         "required": true,
@@ -345,6 +372,15 @@
                     }
                 },
                 "parameters": [
+                    {
+                        "name": "x_access_token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "x access token"
+                        }
+                    },                    
                     {
                         "name": "comma_separated_asset_list",
                         "in": "query",
